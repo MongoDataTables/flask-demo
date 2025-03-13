@@ -1,0 +1,237 @@
+
+:root {
+	--dte-dropdown-width: 100%;
+	--dte-dropdown-zindex: 12;
+	--dte-dropdown-background: white;
+	--dte-dropdown-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-dropdown-border: 1px solid #c3c3c3;
+	--dte-dropdown-border-radius: 5px;
+	--dte-dropdown-font-size: 0.9em;
+	--dte-dropdown-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	--dte-dropdown-input-border: 1px solid #aaa;
+	--dte-dropdown-input-border-radius: 3px;
+	--dte-dropdown-input-padding: 0.5em;
+
+	--dte-tag-background: white;
+	--dte-tag-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-tag-border: 1px solid #aaa;
+	--dte-tag-border-radius: 2px;
+	--dte-tag-color: inherit;
+	--dte-tag-font-size: 0.92em; // try to make the same size as an input element's text
+	--dte-tag-margin: 0.5em;
+	--dte-tag-label-line-height: normal;
+	--dte-tag-label-padding: 5px 10px;
+}
+
+html.dark {
+	--dte-dropdown-background: rgb(28, 32, 36);
+	--dte-dropdown-background-hover: rgba(255, 255, 255, 0.1);
+	--dte-dropdown-border: 1px solid rgba(255, 255, 255, 0.15);
+	--dte-dropdown-shadow: 2px 6px 8px 0 rgba(0, 0, 0, 0.5);
+	--dte-dropdown-input-border: 1px solid rgba(255, 255, 255, 0.15);
+
+	--dte-tag-background: rgba(255, 255, 255, 0.1);
+	--dte-tag-background-hover: rgba(255, 255, 255, 0.05);
+	--dte-tag-border: 1px solid rgb(89, 91, 94);
+}
+
+@import 'mixins.scss';
+
+
+div.DTE {
+	position: relative;
+
+	div.DTE_Header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 52px;
+		width: 100%;
+		background-color: #e8e9eb;
+		border-bottom: 1px solid rgba(0,0,0, 0.15);
+		padding: 16px 10px 2px 16px;
+		font-size: 1.3em;
+		@include box-sizing(border-box);
+	}
+	
+	div.DTE_Body {
+		position: relative;
+	}
+
+	div.DTE_Footer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 52px;
+		width: 100%;
+		background-color: #e8e9eb;
+		border-top: 1px solid rgba(0,0,0, 0.15);
+		padding: 10px;
+		@include box-sizing(border-box);
+	}
+
+	div.DTE_Form_Info {
+		margin-bottom: 0.5em;
+		display: none;
+	}
+
+	div.DTE_Form_Content {
+		position: relative;
+		padding: 1em;
+	}
+
+	div.DTE_Form_Error {
+		float: left;
+		padding: 5px;
+		display: none;
+		color: rgb(220, 53, 69);
+
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	div.DTE_Form_Buttons {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	button.btn,
+	div.DTE_Form_Buttons button {
+		position: relative;
+		text-align: center;
+		display: block;
+		margin-top: 0;
+		padding: 0.5em 1em;
+		cursor: pointer;
+		margin-left: 0.75em;
+		color: #111;
+
+		font-size: 14px;
+		line-height: 1em;
+		white-space: nowrap;
+		border: 1px solid #999;
+
+		@include border-radius( 2px );
+		@include box-shadow( 1px, 1px, 3px, #ccc );
+		@include two-stop-gradient( #ffffff, #dcdcdc );
+
+		&:hover {
+			border: 1px solid #666;
+			@include box-shadow( 1px, 1px, 3px, #999 );
+			@include two-stop-gradient( #eaeaea, #cccccc );
+		}
+
+		&:active {
+			@include box-shadow( 1px, 1px, 3px, #999, true );
+		}
+
+		&:focus {
+			border: 1px solid #426c9e;
+			text-shadow: 0 1px 0 #c4def1;
+			@include two-stop-gradient(#bddef4, #79ace9);
+			outline: none;
+
+			&:after {
+				// Can't animate the background gradient, so we use a white block
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: white;
+				display: block;
+				content: " ";
+
+				@include animation( 1s, buttonPulse );
+			}
+		}
+	}
+
+	&.DTE_Action_Create {}
+
+	&.DTE_Action_Edit {}
+
+	&.DTE_Action_Remove div.DTE_Body_Content {
+		text-align: center;
+		padding: 20px 0;
+	}
+}
+
+@include keyframe( buttonPulse ) {
+    0% { opacity: 0; }
+    100% { opacity: 0.2; }
+}
+
+// TableTools container position for the default Editor styles
+div.DTTT_container {
+	float: left;
+}
+
+html.dark {
+	div.DTE {
+		div.DTE_Header {
+			background-color: rgba(0, 0, 0, 0.1);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+		}
+		
+		div.DTE_Footer {
+			background-color: rgba(0, 0, 0, 0.1);
+			border-top: 1px solid rgba(255, 255, 255, 0.15);
+		}
+
+		div.DTE_Form_Error {
+			color: rgb(220, 53, 69);
+		}
+
+		button.btn,
+		div.DTE_Form_Buttons button {
+			box-shadow: none;
+			background-image: none;
+			background-color: rgba(255, 255, 255, 0.15);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			color: inherit;
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.2);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+			}
+
+			&:active {
+				@include box-shadow( 1px, 1px, 3px, #1d1d1d, true );
+			}
+
+			&:focus {
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				text-shadow: none;
+				background: rgb(0, 81, 202);
+				color: white;
+
+				&:after {
+					background: none;
+				}
+			}
+		}
+	}
+}
+
+@import 'fields.scss';
+@import 'main.scss';
+@import 'bubble.scss';
+@import 'inline.scss';
+@import 'lightbox.scss';
+@import 'envelope.scss';
+@import 'datatable.scss';
+@import 'upload.scss';
+@import 'processing.scss';
+@import 'dropdown.scss';
+
+
+div.DTE_Bubble {
+	div.DTE_Bubble_Liner {
+		div.DTE_Header + div.DTE_Form_Info,
+		div.DTE_Header + div.DTE_Bubble_Table {
+			padding-top: 50px;
+		}
+	}
+}

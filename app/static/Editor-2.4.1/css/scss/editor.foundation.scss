@@ -1,0 +1,292 @@
+
+:root {
+	--dte-dropdown-width: 100%;
+	--dte-dropdown-zindex: 1007;
+	--dte-dropdown-background: white;
+	--dte-dropdown-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-dropdown-border: 1px solid #cacaca;
+	--dte-dropdown-border-radius: 0;
+	--dte-dropdown-font-size: 1em;
+	--dte-dropdown-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	--dte-dropdown-input-border: 1px solid #cacaca;
+	--dte-dropdown-input-border-radius: 0;
+	--dte-dropdown-input-padding: .5rem;
+
+	--dte-tag-background: white;
+	--dte-tag-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-tag-border: 1px solid #cacaca;
+	--dte-tag-border-radius: 0;
+	--dte-tag-color: inherit;
+	--dte-tag-font-size: 1em;
+	--dte-tag-margin: 0.5em;
+	--dte-tag-label-line-height: normal;
+	--dte-tag-label-padding: .5rem;
+}
+
+@import 'mixins.scss';
+
+div.DTE {
+	div.DTE_Form_Error {
+		display: none;
+		color: #b11f1f;
+	}
+
+	div.DTE_Form_Buttons {
+		display: flex;
+		justify-content: flex-end;
+
+		button {
+			margin-left: 0.5em;
+		}
+	}
+}
+
+
+div.DTE_Field {
+	div.multi-value,
+	div.multi-restore {
+		display: none;
+		cursor: pointer;
+		padding: 0.75rem;
+
+		span {
+			display: block;
+			color: #666;
+			font-size: 0.8em;
+			line-height: 1.25em;
+		}
+
+		&:hover {
+			background-color: #e5e5e5;
+		}
+	}
+
+	div.multi-restore {
+		margin-top: 0.5em;
+		font-size: 0.8em;
+		line-height: 1.25em;
+		padding: 0.5rem 0.75rem;
+	}
+
+	div.label {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+
+		&:empty {
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	&:after {
+		display: block;
+		content: ".";
+		height: 0;
+		line-height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+
+	&.full {
+		label,
+		>div {
+			margin-left: -12.5%;
+			margin-right: -12.5%;
+		}
+	}
+
+	div.DTE_Field_Input {
+		position: relative;
+	}
+}
+
+
+div.reveal-modal {
+	button.close {
+		position: absolute;
+		top: -1.5em;
+		right: -2.5em;
+	}
+
+	// Foundation 6 compatibility
+	button.close.close-button {
+		right: 1rem;
+    	top: .5rem;
+    	z-index: 100;
+	}
+
+	div.DTE_Header {
+		position: relative;
+		top: -0.5em;
+		font-size: 2.05556rem;
+		line-height: 1.4;
+	}
+
+	div.DTE_Form_Content {
+		width: 75%;
+		margin: 0 auto;
+	}
+
+	div.DTE_Footer {
+		position: relative;
+		bottom: -0.5em;
+		float: right;
+
+		button {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+// Inline editing
+@import 'inline.scss';
+
+div.DTE_Inline {
+	div.DTE_Field {
+		> div {
+			width: 100%;
+			padding: 0;
+		}
+
+		input {
+			height: 30px;
+			margin-bottom: 0;
+		}
+
+		div.label:empty {
+			display: none;
+		}
+	}
+}
+
+
+// Bubble form editing
+@import 'bubble.scss';
+
+div.DTE_Bubble {
+	div.DTE_Bubble_Liner {
+		box-shadow: 0 5px 10px rgba( 0, 0, 0, .2 );
+		border-radius: 6px;
+		border: 1px solid rgba( 0, 0, 0, .2 );
+
+		div.DTE_Bubble_Table {
+			> form {
+				div.DTE_Form_Content {
+					div.DTE_Field {
+						>label,
+						>div {
+							width: 100%;
+							float: none;
+							clear: both;
+							text-align: left;
+						}
+
+						> label {
+							padding-bottom: 4px;
+						}
+					}
+				}
+			}
+
+			div.DTE_Form_Buttons {
+				margin-top: 0;
+			}
+		}
+
+		div.DTE_Header {
+			font-size: 18px;
+			width: 100%;
+		}
+
+		div.DTE_Bubble_Close {
+			&:after {
+				margin-top: -2px;
+				display: block;
+			}
+		}
+	}
+
+	div.DTE_Bubble_Triangle {
+		border-color: rgba(0, 0, 0, 0.2);
+	}
+}
+
+div.DTE_Bubble_Background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	background-color: rgba( 0, 0, 0, 0.05 );
+}
+
+
+@import 'upload.scss';
+
+div.DTE div.editor_upload {
+	button.button,
+	input[type=file] {
+		width: 100%;
+		font-size: 0.8em;
+		margin-bottom: 0;
+	}
+
+	ul li button {
+		width: 63px;
+	}
+}
+
+div.DTE_Field_Type_datatable {
+	div.dt-search input,
+	div.dataTables_filter input {
+		height: 1.75rem;
+		margin-bottom: 0.333rem;
+	}
+
+	div.dt-buttons {
+		padding-bottom: 0.5em;
+		width: 100%;
+		padding-right: 1em;
+		margin-bottom: 0;
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	div.dt-info,
+	div.dataTables_info {
+		font-size: 0.8em;
+		line-height: 1.3em;
+		padding-right: 1em;
+
+		span.select-info {
+			display: block;
+		}
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+        float: none;
+		text-align: center;
+    }
+}
+
+
+@import 'processing.scss';
+@import 'datatable.scss';
+
+
+div.DTE div.DTE_Processing_Indicator {
+	top: 26px;
+	right: 95px;
+}
+
+@import 'dropdown.scss';
+
+div.dte-dropdown {
+	td {
+		box-shadow: none !important;
+	}
+}

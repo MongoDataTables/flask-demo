@@ -4,6 +4,6 @@ Flask-PyMongo==2.3.0
 itsdangerous==1.1.0
 Jinja2==2.10.3
 MarkupSafe==1.1.1
-mongo-datatables==0.3.0
+# mongo-datatables==0.3.0
 pymongo==3.9.0
 Werkzeug==0.16.0

@@ -1,0 +1,302 @@
+
+:root {
+	--dte-dropdown-width: 100%;
+	--dte-dropdown-zindex: 1002;
+	--dte-dropdown-background: white;
+	--dte-dropdown-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-dropdown-border: 1px solid rgba(34,36,38,.15);
+	--dte-dropdown-border-radius: .28571429rem;
+	--dte-dropdown-font-size: 1em;
+	--dte-dropdown-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	--dte-dropdown-input-border: 1px solid rgba(13, 29, 44, 0.15);
+	--dte-dropdown-input-border-radius: .28571429rem;
+	--dte-dropdown-input-padding: .67857143em 1em;
+
+	--dte-tag-background: white;
+	--dte-tag-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-tag-border: 1px solid rgba(34,36,38,.15);
+	--dte-tag-border-radius: .28571429rem;
+	--dte-tag-color: inherit;
+	--dte-tag-font-size: 1em;
+	--dte-tag-margin: 0.5em;
+	--dte-tag-label-line-height: normal;
+	--dte-tag-label-padding: .67857143em 1em;
+}
+
+@import 'mixins.scss';
+
+div.DTE {
+	div.DTE_Form_Error {
+		display: none;
+		color: #b11f1f;
+		float: left;
+		padding-top: 11px;
+	}
+
+	div.DTE_Form_Buttons {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	label {
+		padding-top: 9px !important;
+		align-self: flex-start;
+		justify-content: flex-end;
+	}
+
+	div.eight.wide.field {
+		flex-direction: column;
+	}
+
+	div.DTE_Field_InputControl {
+		position: relative;
+		width: 100%;
+		margin: 0 !important;
+	}
+
+	div.ui.message:empty {
+		display: none;
+	}
+}
+
+div.DTE_Field {
+	div.ui.message {
+		width: 100%;
+	}
+
+	div.multi-value,
+	div.multi-restore {
+		display: none;
+		cursor: pointer;
+		margin-top: 0;
+
+		span {
+			display: block;
+			color: #666;
+			font-size: 0.85em;
+			line-height: 1.35em;
+		}
+
+		&:hover {
+			background-color: #f1f1f1;
+		}
+	}
+
+	div.multi-restore {
+		margin-top: 0.5em;
+		font-size: 0.8em;
+		line-height: 1.25em;
+	}
+
+	&:after {
+		display: block;
+		content: ".";
+		height: 0;
+		line-height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+
+	&.block {
+		display: block !important;
+
+		label,
+		>div {
+			justify-content: flex-start;
+			width: 100% !important;
+		}
+	}
+}
+
+
+// // Inline editing
+@import 'inline.scss';
+div.DTE.DTE_Inline.ui.form {
+
+	div.DTE_Field {
+		width: 100%;
+		margin: 0 !important;
+
+		div.DTE_Field_Input {
+			width: 100% !important;
+			box-sizing: border-box;
+		}
+
+		> label {
+			display: none !important;
+		}
+
+		> div {
+			width: 100%;
+			padding: 0;
+		}
+	}
+
+	&.DTE_Processing:after {
+		top: 5px;
+	}
+}
+
+
+// Bubble form editing
+@import 'bubble.scss';
+
+div.DTE_Bubble {
+	z-index: 1001;
+
+	div.DTE_Bubble_Liner {
+		box-shadow: 0 5px 10px rgba( 0, 0, 0, .2 );
+		border-radius: 6px;
+		padding: 1em;
+		border: 1px solid rgba( 0, 0, 0, .2 );
+
+		div.DTE_Bubble_Table {
+			position: initial;
+
+			> form {
+				position: initial;
+
+				div.DTE_Form_Content {
+					div.DTE_Field {
+						flex-direction: column;
+
+						label,
+						>div {
+							justify-content: flex-start;
+							width: 100% !important;
+							float: none;
+							clear: both;
+							text-align: left;
+						}
+
+						label {
+							padding-bottom: 4px;
+						}
+
+						&:first-child label {
+							padding-top: 0 !important;
+						}
+					}
+				}
+			}
+
+			div.DTE_Form_Buttons {
+				text-align: right;
+				padding: 0;
+			}
+		}
+
+		div.DTE_Header {
+			font-size: 18px;
+		}
+	}
+
+	div.DTE_Bubble_Triangle {
+		border-bottom: 1px solid rgba( 0, 0, 0, .2 );
+		border-left: 1px solid rgba( 0, 0, 0, .2 );
+	}
+}
+
+@import 'upload.scss';
+
+div.DTE div.editor_upload {
+	button.btn,
+	input[type=file] {
+		height: auto;
+	}
+
+	ul li button {
+		padding-bottom: 8px;
+	}
+}
+
+div.DTE_Field_Type_datatable {
+	label {
+		display: block !important;
+		text-align: right;
+	}
+
+	div.dt-search {
+		margin-top: 1em;
+	}
+
+	div.dt-info {
+		margin-top: 0.75em;
+	}
+
+	div.dt-search,
+	div.dataTables_filter {
+		display: block !important;
+		text-align: left;
+		margin-bottom: 6px;
+
+		input {
+			width: 100% !important;
+		}
+	}
+
+	div.dt-buttons {
+		margin-bottom: 6px;
+		width: 100%;
+
+		button {
+			width: 100%;
+		}
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	div.dt-info,
+	div.dataTables_info {
+		font-size: 0.8em;
+		font-weight: normal;
+		line-height: 1.3em;
+
+		span.select-info {
+			display: block;
+		}
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+		margin-top: 0.3em;
+        text-align: center;
+    }
+
+	div.dt-container > div.row:nth-child(1) {
+		display: none;
+	}
+}
+
+
+@import 'processing.scss';
+@import 'datatable.scss';
+
+div.DTE div.DTE_Processing_Indicator {
+	top: 22px;
+	right: 12px;
+}
+
+
+div.DTE_Field_Type_checkbox,
+div.DTE_Field_Type_radio {
+	div.DTE_Field_InputControl {
+		padding-top: 7px;
+	}
+
+	> div > div {
+		margin-bottom: 0.2em;
+
+		input {
+			vertical-align: baseline !important;
+		}
+
+		label {
+			margin-left: 0.75em;
+			padding-top: 11px !important;
+		}
+	}
+}
+
+@import 'dropdown.scss';

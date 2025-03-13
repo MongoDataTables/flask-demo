@@ -1,0 +1,30 @@
+
+// Row highlighting on edit styles
+
+table.dataTable {
+	tr.dte-highlight {
+		animation-duration: 1s;
+		animation-name: dte-highlight;
+	}
+
+	tr.dte-inlineAdd {
+		td,
+		th {
+			vertical-align: top;
+		}
+	}
+}
+
+@keyframes dte-highlight {
+	from {
+		box-shadow: 0 0 0 rgba(235, 121, 15, 1);
+	}
+
+	50% {
+		box-shadow: 0 0 5px rgba(235, 121, 15, 1);
+	}
+  
+	to {
+		box-shadow: 0 0 10px rgba(235, 121, 15, 0);
+	}
+}

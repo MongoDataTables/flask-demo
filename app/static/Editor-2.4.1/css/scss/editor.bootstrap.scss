@@ -1,0 +1,314 @@
+
+// This stylesheet can be included from later BS versions which set the version themselves
+$bootstrap-version: 3 !default;
+
+@if $bootstrap-version == 3 {
+	:root {
+		--dte-dropdown-width: 100%;
+		--dte-dropdown-zindex: 1051;
+		--dte-dropdown-background: white;
+		--dte-dropdown-background-hover: rgba(0, 0, 0, 0.1);
+		--dte-dropdown-border: 1px solid #cccc;
+		--dte-dropdown-border-radius: 4px;
+		--dte-dropdown-font-size: 0.9em;
+		--dte-dropdown-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+		--dte-dropdown-input-border: 1px solid #cccc;
+		--dte-dropdown-input-border-radius: 4px;
+		--dte-dropdown-input-padding: 6px 12px;
+
+		--dte-tag-background: white;
+		--dte-tag-background-hover: rgba(0, 0, 0, 0.1);
+		--dte-tag-border: 1px solid #cccc;
+		--dte-tag-border-radius: 4px;
+		--dte-tag-color: inherit;
+		--dte-tag-font-size: 1em;
+		--dte-tag-margin: 0.25em;
+		--dte-tag-label-padding: 6px 12px;
+		--dte-tag-label-line-height: inherit;
+	}
+}
+
+@import 'mixins.scss';
+
+div.DTE {
+	div.DTE_Form_Error {
+		color: #b11f1f;
+	}
+
+	div.DTE_Form_Buttons {
+		display: flex;
+		justify-content: flex-end;
+
+		button {
+			margin-left: 0.5em;
+		}
+	}
+}
+
+div.modal div.DTE {
+	div.DTE_Form_Error {
+		display: none;
+		float: left;
+		padding-top: 7px;
+	}
+}
+
+
+div.DTE_Field {
+	position: relative;
+
+	div.multi-value,
+	div.multi-restore {
+		display: none;
+		cursor: pointer;
+
+		span {
+			display: block;
+			color: #666;
+		}
+
+		&:hover {
+			background-color: #f1f1f1;
+		}
+	}
+
+	div.multi-restore {
+		margin-top: 0.5em;
+		font-size: 0.8em;
+		line-height: 1.25em;
+	}
+
+	&:after {
+		display: block;
+		content: ".";
+		height: 0;
+		line-height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+	
+	div:not([data-dte-e="msg-error"]) {
+		color: inherit;
+	}
+}
+
+div.DTE_Body {
+	div.DTE_Body_Content {
+		div.DTE_Field {
+			&.block {
+				label,
+				>div {
+					text-align: left;
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+
+// // Inline editing
+@import 'inline.scss';
+div.DTE_Inline {
+	div.DTE_Field {
+		width: 100%;
+
+		> div {
+			width: 100%;
+			padding: 0;
+		}
+
+		input.form-control {
+			height: 30px;
+		}
+
+		div.help-block {
+			display: none;
+			margin-top: 10px;
+			margin-bottom: 0;
+		}
+	}
+
+	&.DTE_Processing:after {
+		top: 5px;
+	}
+}
+
+div.DTE_Field_Type_checkbox,
+div.DTE_Field_Type_radio {
+	div.controls {
+		margin-top: 0.4em;
+	}
+
+	input {
+		vertical-align: middle;
+	}
+
+	div.DTE_Field div label {
+		margin-left: 0.75em;
+		margin-bottom: 0;
+		vertical-align: middle;
+		font-weight: normal;
+	}
+}
+
+
+// Bubble form editing
+@import 'bubble.scss';
+
+div.DTE_Bubble {
+	div.DTE_Bubble_Liner {
+		box-shadow: 0 5px 10px rgba( 0, 0, 0, .2 );
+		border-radius: 6px;
+		padding: 1em;
+		border: 1px solid rgba( 0, 0, 0, .2 );
+
+		div.DTE_Bubble_Table {
+			> form {
+				div.DTE_Form_Content {
+					div.DTE_Field {
+						> label,
+						> div {
+							width: 100%;
+							max-width: 100%;
+							float: none;
+							clear: both;
+							text-align: left;
+							flex: none;
+						}
+
+						> label {
+							padding: 0 0 4px 0;
+						}
+					}
+				}
+			}
+
+			div.DTE_Form_Buttons {
+				text-align: right;
+				margin-top: 0;
+			}
+		}
+
+		div.DTE_Header {
+			border-bottom: none;
+			font-size: 14px;
+			width: 100%;
+			padding: 0;
+
+			// Bubble editing has its own close button
+			button.close,
+			button.btn-close {
+				display: none;
+			}
+		}
+
+		div.DTE_Bubble_Close {
+			&:after {
+				margin-top: -2px;
+				display: block;
+			}
+		}
+	}
+
+	div.DTE_Bubble_Triangle {
+		border-bottom: 1px solid rgba( 0, 0, 0, .2 );
+		border-left: 1px solid rgba( 0, 0, 0, .2 );
+	}
+}
+
+div.DTE_Bubble_Background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	background-color: rgba( 0, 0, 0, 0.05 );
+}
+
+
+@import 'upload.scss';
+
+div.DTE div.editor_upload {
+	button.btn,
+	input[type=file] {
+		height: auto;
+	}
+
+	ul li button {
+		padding-bottom: 8px;
+	}
+}
+
+div.DTE_Field_Type_datatable {
+	div.dt-search {
+		margin-top: 0.75em;
+	}
+
+	div.dt-info,
+	div.dataTables_info {
+		text-align: left;
+		font-size: 0.8em;
+		line-height: 1.3em;
+		padding-right: 1em;
+		font-weight: normal;
+
+		span.select-info {
+			display: block;
+		}
+	}
+
+	div.dt-buttons {
+		padding-bottom: 0.5em;
+		width: 100%;
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	div.dataTables_wrapper div.dataTables_paginate {
+		text-align: center;
+	}
+
+	div.dt-container > div.row:nth-child(1) {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	div.DTE_Field_Type_datatable {
+		label.control-label {
+			text-align: left;
+		}
+	}
+}
+
+
+@import 'processing.scss';
+@import 'datatable.scss';
+
+
+div.DTE div.DTE_Field div.DTE_Processing_Indicator {
+	top: 13px;
+	right: 20px;
+}
+
+div.DTE div.DTE_Processing_Indicator {
+	top: 52px;
+	right: 12px;
+}
+
+@import 'dropdown.scss';
+
+// Dropdown overrides
+div.dte-dropdown div.dt-container {
+	> div.row {
+		margin-top: 0 !important;
+
+		> div {
+			padding: 0;
+		}
+	}
+}

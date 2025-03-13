@@ -1,34 +1,315 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
     <head>
-      {% if title %}
-      <title>{{ title }} - Microblog</title>
-      {% else %}
-      <title>Welcome to Microblog</title>
-      {% endif %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/sl-1.3.1/datatables.min.css"/>
+        <title>{% if title %}{{ title }}{% else %}Dystopian Archives{% endif %}</title>
 
+        <!-- Favicon -->
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+
+        <!-- DataTables Core CSS (includes Bootstrap 5) -->
+        <link href="{{ url_for('static', filename='DataTables/datatables.min.css') }}" rel="stylesheet">
+
+        <!-- DataTables Editor CSS -->
+        <link href="{{ url_for('static', filename='Editor-2.4.1/css/editor.bootstrap5.min.css') }}" rel="stylesheet">
+
+        <!-- Google Fonts - Space Grotesk for headings, Inter for body -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+        <style>
+            :root {
+                --dystopian-bg: #0a0a0c;
+                --dystopian-surface: #1a1a20;
+                --dystopian-surface-hover: #22222a;
+                --dystopian-border: #2a2a35;
+                --dystopian-accent: #3f6cff;
+                --dystopian-accent-glow: rgba(63, 108, 255, 0.15);
+                --dystopian-danger: #ff3b5f;
+                --dystopian-text: rgba(255, 255, 255, 0.87);
+                --dystopian-text-muted: rgba(255, 255, 255, 0.6);
+                --dystopian-success: #28dea8;
+                --dystopian-warning: #ffbd3d;
+                --dystopian-info: #29b9ff;
+            }
+
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: var(--dystopian-bg);
+                color: var(--dystopian-text);
+                line-height: 1.5;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            /* Typography */
+            h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+                font-family: 'Space Grotesk', sans-serif;
+                font-weight: 600;
+            }
+
+            /* Header Bar */
+            .navbar {
+                background-color: var(--dystopian-surface) !important;
+                border-bottom: 1px solid var(--dystopian-border);
+                padding: 0.5rem 1rem;
+            }
+
+            .navbar-brand {
+                font-family: 'Space Grotesk', sans-serif;
+                font-weight: 700;
+                letter-spacing: -0.5px;
+                font-size: 1.5rem;
+                color: white;
+                position: relative;
+            }
+
+            .navbar-brand::after {
+                content: '';
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                background: var(--dystopian-accent);
+                border-radius: 50%;
+                bottom: 0.4em;
+                margin-left: 0.2em;
+                box-shadow: 0 0 10px var(--dystopian-accent);
+            }
+
+            /* Card styling */
+            .card {
+                background-color: var(--dystopian-surface);
+                border: 1px solid var(--dystopian-border);
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+            }
+
+            .card-header {
+                background-color: rgba(0, 0, 0, 0.2);
+                border-bottom: 1px solid var(--dystopian-border);
+                padding: 1rem 1.25rem;
+            }
+
+            /* Tables */
+            .table {
+                color: var(--dystopian-text);
+                font-size: 0.9rem;
+                margin-bottom: 0;
+            }
+
+            .table-dark {
+                --bs-table-bg: var(--dystopian-surface);
+                --bs-table-striped-bg: var(--dystopian-surface-hover);
+                border-color: var(--dystopian-border);
+            }
+
+            .table-striped>tbody>tr:nth-of-type(odd)>* {
+                --bs-table-color-type: var(--bs-table-striped-color);
+                --bs-table-bg-type: var(--dystopian-surface-hover);
+            }
+
+            .table-hover>tbody>tr:hover>* {
+                --bs-table-color-state: var(--bs-table-hover-color);
+                --bs-table-bg-state: rgba(63, 108, 255, 0.08);
+            }
+
+            /* DataTables specific */
+            .dataTables_wrapper .dataTables_length,
+            .dataTables_wrapper .dataTables_filter,
+            .dataTables_wrapper .dataTables_info,
+            .dataTables_wrapper .dataTables_processing,
+            .dataTables_wrapper .dataTables_paginate {
+                color: var(--dystopian-text-muted);
+                font-size: 0.85rem;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button {
+                padding: 0.3em 0.8em;
+                border-radius: 4px;
+            }
+
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+            .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+                background: var(--dystopian-accent) !important;
+                border-color: var(--dystopian-accent) !important;
+                color: white !important;
+                box-shadow: 0 0 15px var(--dystopian-accent-glow);
+            }
+
+            /* Buttons */
+            .btn {
+                border-radius: 6px;
+                font-weight: 500;
+                padding: 0.5rem 1rem;
+                transition: all 0.2s ease;
+            }
+
+            .btn-primary {
+                background-color: var(--dystopian-accent);
+                border-color: var(--dystopian-accent);
+            }
+
+            .btn-primary:hover {
+                background-color: var(--dystopian-accent);
+                filter: brightness(1.1);
+                box-shadow: 0 0 15px var(--dystopian-accent-glow);
+            }
+
+            .btn-danger {
+                background-color: var(--dystopian-danger);
+                border-color: var(--dystopian-danger);
+            }
+
+            .btn-success {
+                background-color: var(--dystopian-success);
+                border-color: var(--dystopian-success);
+            }
+
+            .btn-warning {
+                background-color: var(--dystopian-warning);
+                border-color: var(--dystopian-warning);
+            }
+
+            .btn-info {
+                background-color: var(--dystopian-info);
+                border-color: var(--dystopian-info);
+            }
+
+            /* Badges */
+            .badge {
+                padding: 0.35em 0.65em;
+                font-weight: 500;
+                border-radius: 4px;
+                letter-spacing: 0.02em;
+            }
+
+            /* Custom elements */
+            .theme-badge {
+                display: inline-block;
+                padding: 0.25em 0.6em;
+                background: rgba(63, 108, 255, 0.15);
+                color: rgba(255, 255, 255, 0.9);
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: 500;
+                margin-right: 0.4em;
+                margin-bottom: 0.4em;
+                border: 1px solid rgba(63, 108, 255, 0.3);
+                transition: all 0.2s ease;
+            }
+
+            .theme-badge:hover {
+                background: rgba(63, 108, 255, 0.3);
+                border-color: rgba(63, 108, 255, 0.5);
+            }
+
+            /* Star ratings */
+            .star-rating {
+                color: var(--dystopian-warning);
+                letter-spacing: -0.03em;
+                filter: drop-shadow(0 0 2px rgba(255, 189, 61, 0.4));
+            }
+
+            /* Form controls */
+            .form-control {
+                background-color: rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--dystopian-border);
+                color: var(--dystopian-text);
+                border-radius: 6px;
+            }
+
+            .form-control:focus {
+                background-color: rgba(0, 0, 0, 0.25);
+                border-color: var(--dystopian-accent);
+                box-shadow: 0 0 0 0.2rem var(--dystopian-accent-glow);
+                color: white;
+            }
+
+            /* Page header */
+            .page-header {
+                border-bottom: 1px solid var(--dystopian-border);
+                margin-bottom: 2rem;
+                padding-bottom: 1rem;
+            }
+
+            /* Editor dialogs */
+            div.DTE_Body div.DTE_Body_Content div.DTE_Field {
+                padding: 0.75rem 0;
+            }
+
+            div.DTE_Field input, div.DTE_Field select, div.DTE_Field textarea {
+                background-color: rgba(0, 0, 0, 0.15);
+                border: 1px solid var(--dystopian-border);
+                color: var(--dystopian-text);
+                border-radius: 6px;
+            }
+
+            /* Main container */
+            .main-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 2rem 1rem;
+            }
+
+            /* Compact table styles */
+            .compact-table .table>:not(caption)>*>* {
+                padding: 0.5rem 0.75rem;
+            }
+
+            /* Table header */
+            .table-header {
+                background: linear-gradient(90deg, var(--dystopian-surface) 0%, rgba(63, 108, 255, 0.15) 100%);
+                border-bottom: 1px solid var(--dystopian-border);
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .main-container {
+                    padding: 1rem 0.5rem;
+                }
+
+                .table-responsive {
+                    border-radius: 8px;
+                    overflow: hidden;
+                }
+            }
+        </style>
     </head>
-    <body class="p-3">
-        <ul class="list-inline">
-            <li class="list-inline-item">
-                <a href="/">Home</a>
-            </li>
-            <li class="list-inline-item">
-                <a href="/table-view">DataTables Test</a>
-            </li>
-        </ul>
+    <body>
+        <nav class="navbar navbar-dark mb-4 shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Dystopian Archives</a>
+            </div>
+        </nav>
 
+        <div class="main-container">
+            {% block content %}{% endblock %}
 
-        <hr>
-        {% block content %}{% endblock %}
+            <footer class="mt-5 text-center text-muted">
+                <p class="small">The Dystopian Archives Database • Powered by MongoDB & DataTables</p>
+            </footer>
+        </div>
+
+        <!-- DataTables JS (includes Bootstrap 5, jQuery, JSZip, pdfmake, Moment, and all extensions) -->
+        <script src="{{ url_for('static', filename='DataTables/datatables.min.js') }}"></script>
+
+        <!-- DataTables Editor JS -->
+        <script src="{{ url_for('static', filename='Editor-2.4.1/js/dataTables.editor.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='Editor-2.4.1/js/editor.bootstrap5.min.js') }}"></script>
+
+        <!-- DateTime extension for Editor -->
+        <script src="https://cdn.datatables.net/datetime/1.4.1/js/dataTables.dateTime.min.js"></script>
+        <link href="https://cdn.datatables.net/datetime/1.4.1/css/dataTables.dateTime.min.css" rel="stylesheet">
+
+        {% block scripts %}{% endblock %}
     </body>
-
-{% block scripts %}
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/r-2.2.3/sc-2.0.1/sl-1.3.1/datatables.min.js"></script>
-
-{% endblock %}
 </html>

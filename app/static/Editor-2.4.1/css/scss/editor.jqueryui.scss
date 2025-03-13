@@ -1,0 +1,113 @@
+
+:root {
+	--dte-dropdown-width: 100%;
+	--dte-dropdown-zindex: 102;
+	--dte-dropdown-background: white;
+	--dte-dropdown-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-dropdown-border: 1px solid #aaa;
+	--dte-dropdown-border-radius: 3px;
+	--dte-dropdown-font-size: 0.9em;
+	--dte-dropdown-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	--dte-dropdown-input-border: 1px solid #aaa;
+	--dte-dropdown-input-border-radius: 3px;
+	--dte-dropdown-input-padding: 5px 4px;
+
+	--dte-tag-background: white;
+	--dte-tag-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-tag-border: 1px solid #aaa;
+	--dte-tag-border-radius: 2px;
+	--dte-tag-color: inherit;
+	--dte-tag-font-size: 1em;
+	--dte-tag-margin: 0.5em;
+	--dte-tag-label-padding: 5px 4px;
+	--dte-tag-label-line-height: normal;
+}
+
+@import 'mixins.scss';
+@import 'fields.scss';
+@import 'main.scss';
+@import 'bubble.scss';
+@import 'inline.scss';
+@import 'datatable.scss';
+@import 'upload.scss';
+@import 'processing.scss';
+@import 'dropdown.scss';
+
+div.DTE {
+	font-size: 0.91em; // jQuery UI uses a 1.1em font size for everything in the dialogue
+
+	div.DTE_Header {
+		display: none;
+	}
+
+	div.DTE_Body {
+		padding: 0;
+
+		div.DTE_Body_Content {
+			overflow: hidden;
+
+			div.DTE_Field {
+				padding: 5px 5%;
+			}
+		}
+	}
+
+	div.DTE_Footer {
+		display: none;
+	}
+
+	div.DTE_Form_Error {
+		padding-top: 1em;
+		color: red;
+		display: none;
+		color: #b11f1f;
+	}
+
+	div.DTE_Processing_Indicator {
+	 	top: 12px;
+		right: 2px;
+		font-size: 0.8em;
+	}
+
+	div.DTE_Form_Buttons {
+		text-align: right;
+		padding: 0;
+		display: flex;
+		justify-content: flex-end;
+	}
+}
+
+div.DTE {
+	div.DTE_Field {
+		&.full {
+			label,
+			>div {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+
+div.DTE_Field_Type_datatable {
+	div.dt-search,
+	div.dataTables_filter {
+		padding-bottom: 0.5em;
+	}
+
+	div.dt-buttons {
+		float: none;
+
+		button {
+			margin-bottom: 3px;
+		}
+	}
+}
+
+div.DTE.DTE_Bubble {
+	div.DTE_Header {
+		display: block;
+		font-size: 18px;
+	}
+}

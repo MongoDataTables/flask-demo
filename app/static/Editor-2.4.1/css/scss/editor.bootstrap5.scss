@@ -1,0 +1,159 @@
+
+$bootstrap-version: 5;
+
+:root {
+	--dte-dropdown-width: 100%;
+	--dte-dropdown-zindex: 1056; // Can't use --bs-model-zindex as it is under .model, which our dropdown isn't
+	--dte-dropdown-background: var(--bs-body-bg);
+	--dte-dropdown-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-dropdown-border: var(--bs-border-width) solid var(--bs-border-color);
+	--dte-dropdown-border-radius: var(--bs-border-radius);
+	--dte-dropdown-font-size: 0.9em;
+	--dte-dropdown-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	--dte-dropdown-input-border: var(--bs-border-width) solid var(--bs-border-color);
+	--dte-dropdown-input-border-radius: var(--bs-border-radius);
+	--dte-dropdown-input-padding: .375rem .75rem;
+
+	--dte-tag-background: var(--bs-body-bg);
+	--dte-tag-background-hover: rgba(0, 0, 0, 0.1);
+	--dte-tag-border: var(--bs-border-width) solid var(--bs-border-color);
+	--dte-tag-border-radius: var(--bs-border-radius);
+	--dte-tag-color: inherit;
+	--dte-tag-font-size: 1em;
+	--dte-tag-margin: 0.25em;
+	--dte-tag-label-padding: .375rem .75rem;
+	--dte-tag-label-line-height: inherit;
+}
+
+// For variables which don't just use Bootstrap's own variables
+:root[data-bs-theme="dark"] {
+	--dte-dropdown-background-hover: rgba(255, 255, 255, 0.1);
+	--dte-tag-background-hover: rgba(255, 255, 255, 0.1);
+}
+
+@import 'editor.bootstrap.scss';
+
+// No nested element, so can't use `card-block`
+div.multi-value,
+div.multi-restore {
+	padding: 0.5em;
+
+	span {
+		line-height: 1.2em;
+	}
+}
+
+div.DTE_Bubble {
+	div.DTE_Bubble_Liner {
+		div.DTE_Bubble_Table {
+			> form div.DTE_Form_Content {
+				margin: 0 1em;
+			}
+
+			div.DTE_Form_Buttons {
+				margin-top: 1em;
+			}
+		}
+	}
+}
+div.DTE_Inline {
+	div.DTE_Field {
+		width: 100%;
+		margin: 0;
+		
+		> div {
+			max-width: 100%;
+			flex: none;
+		}
+		
+		input {
+			font-size: 1em;
+			margin: -5px 0 -10px !important;
+		}
+
+		div.form-text {
+			margin-top: 1em;
+
+			&:empty {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+div.DTE_Body {
+	div.DTE_Body_Content {
+		div.DTE_Field {
+			&.block {
+				label,
+				>div {
+					max-width: 100%;
+					flex: 0 0 100%;
+				}
+			}
+		}
+	}
+}
+
+div.DTE_Field_Type_checkbox,
+div.DTE_Field_Type_radio {
+	div.DTE_Field_InputControl {
+		padding-top: 5px;
+	}
+
+	div {
+		label {
+			margin-left: 0.75em;
+			vertical-align: middle;
+		}
+	}
+}
+
+div.DTE div.DTE_Processing_Indicator {
+	top: 20px;
+	right: 36px;
+}
+
+div.DTE_Field_Type_datatable {
+	div.dt-search,
+	div.dataTables_filter {
+		padding-bottom: 0.5em;
+	}
+
+	div.dt-buttons {
+		padding-bottom: 0.5em;
+		width: 100%;
+
+		&:empty {
+			display: none;
+		}
+	}
+
+	div.dt-search,
+	div.dataTables_info {
+		font-size: 0.8em;
+		line-height: 1.3em;
+		padding-right: 0;
+
+		span.select-info {
+			display: block;
+		}
+	}
+
+	div.dt-container,
+	div.dataTables_wrapper {
+		table.dataTable {
+			border: 1px solid var(--bs-border-color);
+			border-radius: 3px;
+
+			thead th,
+			tbody td {
+				border-top: none;
+			}
+		}
+
+		div.dataTables_paginate ul.pagination {
+			justify-content: center;
+		}
+	}
+}
