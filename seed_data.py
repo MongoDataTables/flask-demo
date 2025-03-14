@@ -62,8 +62,17 @@ def generate_books(count, batch_size=1000, connection_string='mongodb://localhos
         batch_size = min(batch_size, count - i)
 
         for j in range(batch_size):
-            # Create unique title using Faker
-            title = fake.sentence(nb_words=random.randint(2, 5)).rstrip('.').title()
+            # Create unique title using a randomly selected method
+            title_methods = [
+                lambda: fake.catch_phrase().title(),
+                lambda: " ".join(fake.words(nb=random.randint(2, 5))).title(),
+                lambda: f"The {fake.word().title()} Of {fake.word().title()}",
+                lambda: f"{fake.word().title()} {fake.word().title()}",
+                lambda: f"{fake.word().title()}: {' '.join(fake.words(nb=random.randint(2, 4))).title()}"
+            ]
+
+            # Select and execute a random title generation method
+            title = random.choice(title_methods)()
 
             # Create unique author
             author = fake.name()
