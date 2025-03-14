@@ -318,8 +318,8 @@ This demo supports DataTables Editor integration, but Editor is a commercial pro
 
 ## Related Projects
 
-- [mongo-datatables](https://github.com/yourusername/mongo-datatables) - The core Python package used in this demo
-- [Django Demo](https://github.com/yourusername/mongo-datatables-django-demo) - Similar demo using Django instead of Flask
+- [mongo-datatables](https://github.com/MongoDataTables/mongo-datatables) - The core Python package used in this demo
+- [Django Demo](https://github.com/MongoDataTables/django-demo) - Similar demo using Django instead of Flask
 
 ## Contributing
 
