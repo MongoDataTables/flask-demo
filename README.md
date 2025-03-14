@@ -25,7 +25,7 @@ The demo presents a fictional "Dystopian Archives" database to showcase various 
 
 1. Clone this repository:
    ```
-   git clone https://github.com/yourusername/mongo-datatables-flask-demo.git
+   git clone https://github.com/MongoDataTables/flask-demo.git
    cd mongo-datatables-flask-demo
    ```
 
