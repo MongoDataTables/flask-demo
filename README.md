@@ -56,16 +56,16 @@ To test and demonstrate the functionality of this application, you'll need sampl
 pip install pymongo faker
 
 # Generate 100 sample books (default)
-python seed_books.py
+python seed_data.py
 
 # Generate a specific number of books
-python seed_books.py --count 1000
+python seed_data.py --count 1000
 
 # Generate books with larger batch size (for better performance)
-python seed_books.py --count 10000 --batch-size 5000
+python seed_data.py --count 10000 --batch-size 5000
 
 # Use a custom MongoDB connection string
-python seed_books.py --connection "mongodb://username:password@hostname:port/"
+python seed_data.py --connection "mongodb://username:password@hostname:port/"
 ```
 
 ### Data Structure
@@ -110,10 +110,10 @@ The seeding script supports generating millions of records for performance testi
 
 ```bash
 # Generate 20 million records (this will take a while)
-python seed_books.py --count 20000000 --batch-size 10000
+python seed_data.py --count 20000000 --batch-size 10000
 ```
 
-Remember to create appropriate indexes on your MongoDB collection after seeding to ensure good query performance.
+Remember it's important to create appropriate indexes on your MongoDB collection after seeding to ensure good query performance. The `tools/db_init.py` script will run on start-up if you forget.
 
 ## Configuration
 
@@ -131,7 +131,8 @@ Remember to create appropriate indexes on your MongoDB collection after seeding 
 
 Start the development server:
 ```
-python app/app.py
+cd app
+flask run
 ```
 
 The application will be available at [http://localhost:5000](http://localhost:5000)

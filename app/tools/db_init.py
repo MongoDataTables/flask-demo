@@ -1,10 +1,13 @@
-# tools/db_init.py
+# app/tools/db_init.py
 from flask import current_app
+from pymongo import MongoClient
 
 
-def create_indexes():
+def create_indexes(db=None):
     try:
-        db = current_app.mongo.db  # type: ignore
+        # Use the provided db or get it from Flask's current_app
+        if db is None:
+            db = current_app.mongo.db  # type: ignore
 
         print("Creating Indexes")
         # Create text indexes for full-text search capabilities
@@ -48,3 +51,26 @@ field_types = {
         print(f"Error creating indexes: {e}")
         import traceback
         print(traceback.format_exc())
+
+
+def main():
+    """Run as standalone script"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Create MongoDB indexes for book database')
+    parser.add_argument('--uri', type=str, default='mongodb://localhost:27017/book_database',
+                        help='MongoDB connection string (default: mongodb://localhost:27017/book_database)')
+
+    args = parser.parse_args()
+
+    # Connect directly to MongoDB
+    client = MongoClient(args.uri)
+    db = client.get_database()
+
+    print(f"Connected to MongoDB: {args.uri}")
+    create_indexes(db)
+
+
+if __name__ == "__main__":
+    # This will be executed when running as python -m app.tools.db_init
+    main()
