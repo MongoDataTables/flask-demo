@@ -26,7 +26,7 @@ The demo presents a fictional "Dystopian Archives" database to showcase various 
 1. Clone this repository:
    ```
    git clone https://github.com/MongoDataTables/flask-demo.git
-   cd mongo-datatables-flask-demo
+   cd flask-demo
    ```
 
 2. Create and activate a virtual environment:
