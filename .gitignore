@@ -43,6 +43,7 @@ instance/
 
 # Ignore Editor specific files
 app/static/Editor-2.4.1/
+app/static/DataTables/
 mongo_datatables/
 _mongo_datatables/
 
