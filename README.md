@@ -100,6 +100,40 @@ The seeding script creates book records with the following structure:
 
 This structure demonstrates many MongoDB capabilities including nested documents and arrays, making it perfect for testing the DataTables and Editor integration.
 
+## Enabling DataTables Editor
+
+This demo application is designed to work with or without the DataTables Editor component, which is a paid jQuery library for adding editing capabilities to DataTables.
+
+To enable Editor functionality:
+
+1. Purchase a license from [DataTables Editor](https://editor.datatables.net/)
+2. Download the Editor files and place them in the following directory structure:
+   ```
+   app/static/Editor-2.4.1/
+   ├── css/
+   │   └── editor.bootstrap5.min.css
+   └── js/
+       ├── dataTables.editor.min.js
+       └── editor.bootstrap5.min.js
+   ```
+3. Uncomment the Editor-related lines in `app/templates/books.html`:
+   ```html
+   <!-- DataTables Editor CSS - Uncomment to enable editing functionality -->
+   <link href="{{ url_for('static', filename='Editor-2.4.1/css/editor.bootstrap5.min.css') }}" rel="stylesheet">
+   
+   <!-- DataTables Editor JS - Uncomment to enable editing functionality -->
+   <script src="{{ url_for('static', filename='Editor-2.4.1/js/dataTables.editor.min.js') }}"></script>
+   <script src="{{ url_for('static', filename='Editor-2.4.1/js/editor.bootstrap5.min.js') }}"></script>
+   ```
+
+The application will automatically detect the presence of the Editor library and enable the editing functionality accordingly. If Editor is not available, the application will display a read-only view with export buttons instead of edit buttons.
+
+## Support the Project
+
+If you find this project helpful, consider buying me a coffee!
+
+<a href="https://www.buymeacoffee.com/pjosols" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ### Scaling to Millions of Records
 
 The seeding script supports generating millions of records for performance testing. When generating large datasets:

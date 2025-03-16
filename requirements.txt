@@ -1,4 +1,4 @@
 Flask==3.1.0
 flask_pymongo==3.0.1
-mongo_datatables==1.0.1
+mongo_datatables==1.1.1
 pymongo==4.11.2

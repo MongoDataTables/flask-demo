@@ -25,10 +25,7 @@ def create_app():
         except Exception as e:
             print(f"MongoDB connection error: {e}")
 
-    from app.main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
-
-    from app.api import api as api_blueprint
-    app.register_blueprint(api_blueprint)
+    from app.books import books as books_blueprint
+    app.register_blueprint(books_blueprint)
 
     return app
