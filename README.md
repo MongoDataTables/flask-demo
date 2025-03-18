@@ -174,23 +174,24 @@ The application will be available at [http://localhost:5000](http://localhost:50
 ## Project Structure
 
 ```
-mongo-datatables-flask-demo/
+flask-demo/
 ├── app/                      # Main application package
-│   ├── api/                  # API blueprint
+│   ├── books/                # Books blueprint (combined API and views)
 │   │   ├── __init__.py       # Blueprint initialization
-│   │   └── routes.py         # API endpoints
-│   ├── main/                 # Main blueprint
-│   │   ├── __init__.py       # Blueprint initialization
-│   │   └── routes.py         # View functions
+│   │   └── routes.py         # All routes including API endpoints
 │   ├── static/               # Static files (CSS, JS, etc.)
 │   │   ├── css/              # Custom CSS
+│   │   ├── js/               # JavaScript files
 │   │   └── favicon/          # Favicon files
 │   ├── templates/            # Jinja2 templates
+│   │   └── books.html        # Combined template for the application
 │   ├── tools/                # Utility scripts
 │   │   └── db_init.py        # Database initialization
 │   ├── __init__.py           # Application factory
 │   ├── app.py                # Application entry point
 │   └── config.py             # Configuration settings
+├── docs/                     # Documentation
+├── seed_data.py              # Script to generate sample data
 └── requirements.txt          # Python dependencies
 ```
 
