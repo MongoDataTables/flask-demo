@@ -156,7 +156,7 @@ Remember it's important to create appropriate indexes on your MongoDB collection
    MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017/book_database")
    ```
 
-2. Initialize the database with sample data:
+2. Initialize the database with sample dat manually (or the script will run on start-up):
    ```
    python -m app.tools.db_init
    ```
