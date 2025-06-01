@@ -128,12 +128,6 @@ To enable Editor functionality:
 
 The application will automatically detect the presence of the Editor library and enable the editing functionality accordingly. If Editor is not available, the application will display a read-only view with export buttons instead of edit buttons.
 
-## Support the Project
-
-If you find this project helpful, consider buying me a coffee!
-
-<a href="https://www.buymeacoffee.com/pjosols" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-
 ### Scaling to Millions of Records
 
 The seeding script supports generating millions of records for performance testing. When generating large datasets:
@@ -244,4 +238,3 @@ This demo supports DataTables Editor integration, but Editor is a commercial pro
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
